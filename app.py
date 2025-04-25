@@ -69,6 +69,17 @@ with open(dt_model_path, 'rb') as dt_file:
 
 with open(rf_model_path, 'rb') as rf_file:
     rf_model = pickle.load(rf_file)
+    try:
+    with open(dt_model_path, 'rb') as dt_file:
+        dt_model = pickle.load(dt_file)
+except FileNotFoundError:
+    st.error(f"Decision Tree model file not found at {dt_model_path}. Please check the file path.")
+
+try:
+    with open(rf_model_path, 'rb') as rf_file:
+        rf_model = pickle.load(rf_file)
+except FileNotFoundError:
+    st.error(f"Random Forest model file not found at {rf_model_path}. Please check the file path.")
 
 # Display instructions with styling
 st.markdown('<p class="instructions" style="color:purple; font-size:20px; ">Analyze exam results to uncover insights that drive improvement, inspire achievement, and set students on the path to success!</p>', unsafe_allow_html=True)
